@@ -1,0 +1,61 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Crea tu perfil de paciente',
+    description: 'Regístrate gratis en minutos. Añade tu información básica y, si quieres, sube fotos o documentación relevante para que el especialista te conozca mejor.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>`,
+  },
+  {
+    number: '02',
+    title: 'Busca y explora especialistas',
+    description: 'Filtra por especialidad y ubicación. Consulta el perfil completo de cada doctor: formación, experiencia, precios y localización de la consulta.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>`,
+  },
+  {
+    number: '03',
+    title: 'Contacta directamente',
+    description: 'Envía una solicitud de contacto y empieza a comunicarte de forma segura a través de la mensajería integrada. Sin llamadas, sin intermediarios.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>`,
+  },
+];
+---
+
+<section id="como-funciona" class="py-20 sm:py-28 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="max-w-2xl mx-auto text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">
+        Cómo funciona para pacientes
+      </h2>
+      <p class="mt-4 text-lg text-slate-600">
+        En tres pasos sencillos, conectas con el especialista adecuado para ti.
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="relative">
+      <!-- Connector line (desktop) -->
+      <div class="hidden lg:block absolute top-16 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-primary-100" aria-hidden="true"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8">
+        {steps.map((step, i) => (
+          <div class="relative flex flex-col items-center text-center">
+            <!-- Step circle -->
+            <div class="relative z-10 w-16 h-16 rounded-full bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-200 mb-6">
+              <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={step.icon} />
+            </div>
+
+            <!-- Step number badge -->
+            <span class="absolute top-0 right-1/4 lg:right-auto lg:-top-2 lg:left-[calc(50%+24px)] text-xs font-bold text-primary-400">
+              {step.number}
+            </span>
+
+            <h3 class="text-lg font-bold text-brand-navy mb-3">{step.title}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-xs">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

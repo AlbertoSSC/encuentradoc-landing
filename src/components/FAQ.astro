@@ -1,0 +1,65 @@
+---
+const faqs = [
+  {
+    q: '¿Es gratuito para los pacientes?',
+    a: 'Sí, registrarse y usar EncuentraDoc como paciente es completamente gratuito. Puedes buscar especialistas, ver sus perfiles completos y contactarlos sin ningún coste.',
+  },
+  {
+    q: '¿Cómo se verifica que los doctores son reales?',
+    a: 'Cada doctor indica su número de colegiado en su perfil. Recomendamos verificar la colegiación en el registro oficial antes de iniciar cualquier relación médica. Los perfiles con información incompleta aparecen diferenciados.',
+  },
+  {
+    q: '¿EncuentraDoc sirve para hacer consultas médicas online?',
+    a: 'EncuentraDoc es una plataforma de conexión y comunicación. El canal de mensajería permite intercambiar información con el especialista, pero no sustituye a la consulta médica presencial. El doctor decide cómo gestionar su relación con cada paciente.',
+  },
+  {
+    q: '¿Quién puede ver mi información como paciente?',
+    a: 'Solo los doctores a quienes tú autorices explícitamente pueden acceder a tu perfil y documentación. Tienes control total sobre tu privacidad y puedes revocar el acceso en cualquier momento.',
+  },
+  {
+    q: '¿Cómo funciona el registro para doctores?',
+    a: 'El registro de doctor es independiente del de paciente y usa el mismo sistema de autenticación. Un mismo email no puede estar registrado como paciente y como doctor simultáneamente. El proceso tarda menos de 5 minutos.',
+  },
+  {
+    q: '¿EncuentraDoc tiene app móvil?',
+    a: 'La aplicación es una Progressive Web App (PWA), lo que significa que funciona en cualquier dispositivo desde el navegador y puede instalarse en la pantalla de inicio de tu móvil como si fuera una app nativa, sin pasar por la App Store.',
+  },
+];
+---
+
+<section id="faq" class="py-20 sm:py-28 bg-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">
+        Preguntas frecuentes
+      </h2>
+      <p class="mt-4 text-lg text-slate-600">
+        ¿Tienes dudas? Aquí están las respuestas más habituales.
+      </p>
+    </div>
+
+    <!-- Accordion -->
+    <div class="space-y-3">
+      {faqs.map((faq, i) => (
+        <details class="group border border-slate-200 rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+            <span class="text-sm font-semibold text-brand-navy pr-4">{faq.q}</span>
+            <svg
+              class="w-5 h-5 text-primary-500 shrink-0 transition-transform duration-200 group-open:rotate-45"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-sm text-slate-600 leading-relaxed">{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
