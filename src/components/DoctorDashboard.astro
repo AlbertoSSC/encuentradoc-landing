@@ -1,0 +1,197 @@
+---
+const callouts = [
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>`,
+    title: 'Solicitudes con badge de pendientes',
+    desc: 'Las solicitudes de contacto nuevas aparecen con contador en tiempo real.',
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>`,
+    title: 'Vista previa del último mensaje',
+    desc: 'El panel muestra el nombre del paciente y el inicio del último mensaje.',
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>`,
+    title: 'Reloj dual y calendario mensual',
+    desc: 'Vista analógica y digital con toggle. Calendario decorativo con integración Google Calendar planificada.',
+  },
+];
+---
+
+<section class="py-20 sm:py-28 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <!-- Left: Copy -->
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-xs font-semibold text-primary-700 bg-primary-100 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+          Panel del especialista
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy leading-tight">
+          Tu consulta, desde una pantalla
+        </h2>
+        <p class="mt-4 text-lg text-slate-600 leading-relaxed">
+          El panel del doctor es el centro de control de tu actividad. Gestiona solicitudes de nuevos
+          pacientes, consulta tus mensajes recientes y mantén siempre a mano la fecha y la hora.
+        </p>
+
+        <div class="mt-8 space-y-5">
+          {callouts.map((c) => (
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={c.icon} />
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-brand-navy">{c.title}</p>
+                <p class="text-sm text-slate-500 leading-relaxed mt-0.5">{c.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Dashboard mockup -->
+      <div class="pointer-events-none select-none" aria-hidden="true">
+        <div class="bg-white rounded-2xl shadow-xl shadow-slate-200 border border-slate-100 overflow-hidden">
+
+          <!-- Top nav bar (simulated app nav) -->
+          <div class="flex items-center justify-between px-4 py-2.5 bg-brand-navy text-white">
+            <span class="text-xs font-bold">Encuentra<span class="text-primary-400">Doc</span></span>
+            <div class="flex items-center gap-3">
+              <!-- Mensajes with badge -->
+              <div class="relative">
+                <div class="text-[10px] text-slate-300 font-medium">Mensajes</div>
+                <span class="absolute -top-1.5 -right-2 w-4 h-4 bg-red-500 text-white text-[8px] font-bold rounded-full flex items-center justify-center">2</span>
+              </div>
+              <div class="text-[10px] text-slate-300 font-medium">Mis fotos</div>
+            </div>
+          </div>
+
+          <!-- Profile card -->
+          <div class="px-4 pt-4 pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <!-- Avatar -->
+              <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-sm font-bold text-primary-700 shrink-0">
+                GL
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-bold text-brand-navy">Dr. García López</p>
+                <p class="text-xs text-slate-500">Cardiólogo</p>
+              </div>
+              <div class="text-[9px] text-primary-600 font-medium bg-primary-50 rounded-md px-2 py-1 border border-primary-100 shrink-0">
+                Ver perfil público
+              </div>
+            </div>
+
+            <!-- Clock + Calendar row -->
+            <div class="flex gap-3 mt-3">
+              <!-- Analog + digital clock -->
+              <div class="flex-1 bg-slate-50 rounded-xl p-3 flex items-center gap-3">
+                <!-- SVG analog clock -->
+                <svg viewBox="0 0 48 48" class="w-12 h-12 shrink-0" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Clock face -->
+                  <circle cx="24" cy="24" r="22" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+                  <!-- Hour marks -->
+                  {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => {
+                    const rad = (deg - 90) * Math.PI / 180;
+                    const x1 = 24 + 18 * Math.cos(rad);
+                    const y1 = 24 + 18 * Math.sin(rad);
+                    const x2 = 24 + 21 * Math.cos(rad);
+                    const y2 = 24 + 21 * Math.sin(rad);
+                    return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/>;
+                  })}
+                  <!-- Hour hand (pointing ~10 o'clock = 300deg from 12) -->
+                  <line x1="24" y1="24" x2="15" y2="13" stroke="#1E3A5F" stroke-width="2.5" stroke-linecap="round"/>
+                  <!-- Minute hand (pointing ~10 = 60deg from 12) -->
+                  <line x1="24" y1="24" x2="35" y2="15" stroke="var(--brand)" stroke-width="1.5" stroke-linecap="round"/>
+                  <!-- Center dot -->
+                  <circle cx="24" cy="24" r="2" fill="#1E3A5F"/>
+                </svg>
+                <div>
+                  <p class="text-base font-bold text-brand-navy font-mono leading-none">10:10</p>
+                  <p class="text-[9px] text-slate-400 mt-0.5">lunes, 22 mar</p>
+                </div>
+              </div>
+
+              <!-- Mini calendar -->
+              <div class="flex-1 bg-slate-50 rounded-xl p-3">
+                <p class="text-[9px] font-bold text-brand-navy mb-1.5 text-center">Marzo 2026</p>
+                <table class="w-full text-center">
+                  <thead>
+                    <tr>
+                      {['L','M','X','J','V'].map((d) => (
+                        <th class="text-[7px] font-medium text-slate-400 pb-1">{d}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      [2,3,4,5,6],
+                      [9,10,11,12,13],
+                      [16,17,18,19,20],
+                      [23,24,25,26,27],
+                      [30,31,'','',''],
+                    ].map((week) => (
+                      <tr>
+                        {week.map((day) => (
+                          <td class={`text-[7px] py-0.5 ${day === 22 ? 'font-bold text-white' : 'text-slate-500'}`}>
+                            {day !== '' ? (
+                              <span class={day === 22 ? 'inline-flex items-center justify-center w-4 h-4 rounded-full bg-primary-600 text-white' : ''}>
+                                {day}
+                              </span>
+                            ) : ''}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Last message preview -->
+          <div class="px-4 py-3 border-b border-slate-100">
+            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide mb-2">Último mensaje</p>
+            <div class="flex items-start gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-[10px] font-bold text-emerald-700 shrink-0">AP</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-2">
+                  <p class="text-xs font-semibold text-brand-navy">Ana Pérez</p>
+                  <p class="text-[9px] text-slate-400 shrink-0">hace 5 min</p>
+                </div>
+                <p class="text-[10px] text-slate-500 mt-0.5 truncate">Buenos días doctor, quería consultarle sobre los resultados...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact requests -->
+          <div class="px-4 py-3">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">Solicitudes recibidas</p>
+              <span class="text-[9px] font-bold text-white bg-red-500 rounded-full px-1.5 py-0.5">2</span>
+            </div>
+            <div class="space-y-2">
+              {[
+                { initials: 'CM', name: 'Carlos M.', color: 'bg-violet-100 text-violet-700' },
+                { initials: 'LT', name: 'Lucía T.',  color: 'bg-amber-100 text-amber-700' },
+              ].map((req) => (
+                <div class="flex items-center gap-2">
+                  <div class={`w-7 h-7 rounded-full ${req.color} flex items-center justify-center text-[9px] font-bold shrink-0`}>
+                    {req.initials}
+                  </div>
+                  <p class="text-[10px] font-medium text-brand-navy flex-1 min-w-0 truncate">{req.name}</p>
+                  <div class="text-[9px] text-slate-500 border border-slate-200 rounded px-1.5 py-0.5 shrink-0">Ver perfil</div>
+                  <div class="text-[9px] text-white bg-primary-600 rounded px-1.5 py-0.5 shrink-0">Aceptar</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

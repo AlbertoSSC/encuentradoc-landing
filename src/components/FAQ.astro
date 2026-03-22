@@ -1,8 +1,8 @@
 ---
 const faqs = [
   {
-    q: '¿Es gratuito para los pacientes?',
-    a: 'Sí, registrarse y usar EncuentraDoc como paciente es completamente gratuito. Puedes buscar especialistas, ver sus perfiles completos y contactarlos sin ningún coste.',
+    q: '¿Qué especialidades puedo encontrar en EncuentraDoc?',
+    a: 'EncuentraDoc no limita las especialidades: cualquier médico colegiado puede crear su perfil. Encontrarás especialistas en cardiología, dermatología, traumatología, ginecología, psicología, pediatría y muchas otras áreas. Puedes filtrar por especialidad y ubicación para encontrar el profesional más adecuado para ti.',
   },
   {
     q: '¿Cómo se verifica que los doctores son reales?',
@@ -11,6 +11,10 @@ const faqs = [
   {
     q: '¿EncuentraDoc sirve para hacer consultas médicas online?',
     a: 'EncuentraDoc es una plataforma de conexión y comunicación. El canal de mensajería permite intercambiar información con el especialista, pero no sustituye a la consulta médica presencial. El doctor decide cómo gestionar su relación con cada paciente.',
+  },
+  {
+    q: '¿Cómo funciona el sistema de solicitudes de contacto?',
+    a: 'Como paciente, puedes ver el perfil completo de cualquier doctor sin restricciones. Si quieres iniciar una conversación, envías una solicitud de contacto. El doctor la recibe en su panel y decide si aceptarla. Solo cuando acepta se abre el canal de mensajería entre ambos. Esto protege tanto al paciente como al médico.',
   },
   {
     q: '¿Quién puede ver mi información como paciente?',
@@ -24,10 +28,14 @@ const faqs = [
     q: '¿EncuentraDoc tiene app móvil?',
     a: 'La aplicación es una Progressive Web App (PWA), lo que significa que funciona en cualquier dispositivo desde el navegador y puede instalarse en la pantalla de inicio de tu móvil como si fuera una app nativa, sin pasar por la App Store.',
   },
+  {
+    q: '¿La aplicación tiene modo oscuro?',
+    a: 'Sí. EncuentraDoc incluye tema claro, oscuro y automático (sigue el ajuste del sistema operativo). Puedes cambiarlo en cualquier momento desde los ajustes de la aplicación.',
+  },
 ];
 ---
 
-<section id="faq" class="py-20 sm:py-28 bg-white">
+<section id="faq" class="py-20 sm:py-28">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
     <div class="text-center mb-12">
@@ -39,27 +47,79 @@ const faqs = [
       </p>
     </div>
 
-    <!-- Accordion -->
+    <!-- FAQ list — mirrors app's FaqItem: Card > details > summary + answerContent -->
     <div class="space-y-3">
-      {faqs.map((faq, i) => (
-        <details class="group border border-slate-200 rounded-xl overflow-hidden">
-          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-            <span class="text-sm font-semibold text-brand-navy pr-4">{faq.q}</span>
-            <svg
-              class="w-5 h-5 text-primary-500 shrink-0 transition-transform duration-200 group-open:rotate-45"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-            </svg>
-          </summary>
-          <div class="px-6 pb-5">
-            <p class="text-sm text-slate-600 leading-relaxed">{faq.a}</p>
-          </div>
-        </details>
+      {faqs.map((faq) => (
+        <div class="card faq-card">
+          <details class="faq-details">
+            <summary class="faq-summary">
+              <h3 class="faq-question">{faq.q}</h3>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </summary>
+            <div class="faq-answer-content">
+              <p class="faq-answer">{faq.a}</p>
+            </div>
+          </details>
+        </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  /* Card overrides to match app's .faqCard */
+  .faq-card {
+    padding: var(--spacing-lg);
+    min-width: 0;
+  }
+
+  /* details — width: 100% como en la app */
+  .faq-details {
+    width: 100%;
+  }
+
+  /* summary — flex space-between, sin marker nativo */
+  .faq-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+    gap: var(--spacing-sm);
+  }
+  .faq-summary::-webkit-details-marker { display: none; }
+
+  /* Pregunta */
+  .faq-question {
+    font-weight: var(--weight-semibold);
+    color: var(--text-default);
+    font-size: var(--text-base);
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Icono chevron — rota -180deg al abrir (igual que la app) */
+  .faq-icon {
+    color: var(--text-subtle);
+    transition: transform 0.3s ease-in-out;
+    flex-shrink: 0;
+  }
+  .faq-details[open] .faq-icon {
+    transform: rotate(-180deg);
+  }
+
+  /* Respuesta — border-top brand igual que la app (border-primary = border-brand) */
+  .faq-answer-content {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-brand);
+  }
+  .faq-answer {
+    color: var(--text-subtle);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

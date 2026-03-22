@@ -1,0 +1,474 @@
+/* ================================================================
+   EncuentraDoc Design System — Landing Page
+   Synced from src/common/styles/ and src/common/components/ui/
+   Source of truth: D:\DevWork\encuentraDoc
+   ================================================================ */
+
+/* --- TIER 1: Primitive color tokens (design-tokens.css) --------- */
+:root {
+  /* Blue (Brand) */
+  --color-blue-50:  #e8f4fd;
+  --color-blue-100: #c8e6fa;
+  --color-blue-200: #90cdf4;
+  --color-blue-300: #56b3eb;
+  --color-blue-400: #2196d9;
+  --color-blue-500: #038cd1;
+  --color-blue-600: #0274ae;
+  --color-blue-700: #0369a1;
+  --color-blue-800: #024e77;
+  --color-blue-900: #0c4a6e;
+
+  /* Gray (Neutral) */
+  --color-gray-25:  #fcfcfd;
+  --color-gray-50:  #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+
+  /* Green (Success) */
+  --color-green-50:  #ecfdf5;
+  --color-green-100: #d1fae5;
+  --color-green-500: #10b981;
+  --color-green-600: #059669;
+  --color-green-700: #047857;
+
+  /* Red (Error/Danger) */
+  --color-red-50:  #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+
+  /* Amber (Warning) */
+  --color-amber-50:  #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+
+  /* Sky (Info) */
+  --color-sky-50:  #f0f9ff;
+  --color-sky-100: #e0f2fe;
+  --color-sky-500: #3b82f6;
+  --color-sky-600: #2563eb;
+
+  /* Cyan (Focus ring) */
+  --color-cyan-700: #0e7490;
+  --color-cyan-300: #67e8f9;
+
+  --color-white: #ffffff;
+}
+
+/* --- TIER 2: Semantic theme variables (theme-variables.css) ----- */
+:root {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Brand */
+  --brand:          var(--color-blue-500);
+  --brand-hover:    var(--color-blue-700);
+  --brand-active:   var(--color-blue-800);
+  --brand-light:    var(--color-blue-400);
+  --brand-subtle:   var(--color-blue-50);
+  --brand-muted:    var(--color-blue-100);
+  --brand-on-brand: var(--color-white);
+
+  /* Surfaces */
+  --surface-base:    var(--color-gray-100);
+  --surface-raised:  var(--color-white);
+  --surface-sunken:  var(--color-gray-200);
+  --surface-hover:   var(--color-gray-50);
+  --surface-inverse: var(--color-gray-900);
+
+  /* Text */
+  --text-default:    var(--color-gray-800);
+  --text-subtle:     var(--color-gray-600);
+  --text-muted:      var(--color-gray-500);
+  --text-link:       var(--color-blue-600);
+  --text-link-hover: var(--color-blue-700);
+  --text-on-brand:   var(--color-white);
+  --text-on-inverse: var(--color-gray-50);
+
+  /* Borders */
+  --border-default: var(--color-gray-200);
+  --border-subtle:  var(--color-gray-100);
+  --border-strong:  var(--color-gray-300);
+  --border-brand:   var(--color-blue-500);
+  --border-danger:  var(--color-red-500);
+
+  /* Feedback */
+  --feedback-success:          var(--color-green-500);
+  --feedback-success-subtle:   var(--color-green-50);
+  --feedback-success-emphasis: var(--color-green-700);
+  --feedback-error:            var(--color-red-500);
+  --feedback-error-subtle:     var(--color-red-50);
+  --feedback-error-emphasis:   var(--color-red-700);
+  --feedback-warning:          var(--color-amber-500);
+  --feedback-warning-subtle:   var(--color-amber-50);
+  --feedback-info:             var(--color-sky-500);
+  --feedback-info-subtle:      var(--color-sky-50);
+
+  /* Focus */
+  --focus-outline-color: var(--color-cyan-700);
+  --focus-ring:          0 0 0 3px var(--color-cyan-700);
+  --focus-ring-brand:    0 0 0 3px rgba(14, 116, 144, 0.4);
+  --focus-ring-error:    0 0 0 3px rgba(239, 68, 68, 0.65);
+
+  /* Overlays */
+  --overlay-light: rgba(255, 255, 255, 0.7);
+  --overlay-dark:  rgba(31, 41, 55, 0.95);
+  --overlay-scrim: rgba(0, 0, 0, 0.05);
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+
+  /* Glass */
+  --glass-fill-1:              rgba(255, 255, 255, 0.4);
+  --glass-fill-2:              rgba(255, 255, 255, 0.6);
+  --glass-fill-3:              rgba(255, 255, 255, 0.8);
+  --glass-fill-brand:          rgba(3, 140, 209, 0.06);
+  --glass-blur-sm: blur(4px);
+  --glass-blur-md: blur(8px);
+  --glass-blur-lg: blur(16px);
+  --glass-border-color:        rgba(255, 255, 255, 0.6);
+  --glass-border-subtle-color: rgba(255, 255, 255, 0.3);
+  --glass-border-brand-color:  rgba(3, 140, 209, 0.15);
+  --glass-border-danger-color: rgba(239, 68, 68, 0.15);
+  --glass-border:        1px solid var(--glass-border-color);
+  --glass-border-subtle: 1px solid var(--glass-border-subtle-color);
+  --glass-border-brand:  1px solid var(--glass-border-brand-color);
+  --glass-border-danger: 1px solid var(--glass-border-danger-color);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(
+    135deg,
+    var(--brand) 20%,
+    var(--brand-hover) 100%
+  );
+  --gradient-brand-hover: linear-gradient(
+    135deg,
+    var(--brand-light) 0%,
+    var(--brand) 100%
+  );
+  --gradient-danger: linear-gradient(
+    135deg,
+    var(--feedback-error) 0%,
+    var(--feedback-error-emphasis) 80%
+  );
+  --gradient-danger-hover: linear-gradient(
+    135deg,
+    var(--feedback-error) 20%,
+    var(--feedback-error-emphasis) 100%
+  );
+  --gradient-danger-subtle: linear-gradient(
+    135deg,
+    var(--feedback-error-subtle) 0%,
+    var(--feedback-error-subtle) 100%
+  );
+  --gradient-btn-secondary: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--overlay-light) 10%, transparent) 0%,
+    color-mix(in srgb, var(--overlay-dark) 5%, transparent) 100%
+  );
+
+  /* Radius */
+  --radius-sm:   0.25rem;
+  --radius-md:   0.375rem;
+  --radius-lg:   0.5rem;
+  --radius-xl:   0.75rem;
+  --radius-2xl:  1rem;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --spacing-xs:  0.25rem;
+  --spacing-sm:  0.5rem;
+  --spacing-md:  1rem;
+  --spacing-lg:  1.5rem;
+  --spacing-xl:  2rem;
+  --spacing-2xl: 3rem;
+
+  /* Typography */
+  --font-sans:   "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Transitions */
+  --transition-fast:   150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow:   400ms ease-in-out;
+  --btn-transition:
+    background      var(--transition-normal),
+    box-shadow      var(--transition-normal),
+    transform       var(--transition-normal),
+    color           var(--transition-normal),
+    border-color    var(--transition-normal),
+    opacity         var(--transition-normal);
+
+  /* Deprecated aliases (used by .card and other component classes) */
+  --bg-card:                         var(--glass-fill-1);
+  --primary-color-light-transparent: var(--glass-border-subtle-color);
+  --border-radius-2xl:               var(--radius-2xl);
+  --border-radius-full:              var(--radius-full);
+  --border-color:                    var(--border-default);
+}
+
+/* ================================================================
+   Global base
+   ================================================================ */
+body {
+  background-color: var(--surface-base);
+  color: var(--text-default);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  box-shadow: var(--focus-ring);
+  outline: 2px solid var(--focus-outline-color);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* ================================================================
+   BUTTONS — exact copy from global-utilities.css
+   Note: display/flex/gap/text-decoration added for <a> elements.
+   ================================================================ */
+.btn-primary {
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-on-brand);
+  font-weight: var(--weight-medium);
+  border: 1px solid rgba(91, 137, 197, 0.862);
+  border-radius: var(--radius-xl);
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-md);
+  touch-action: manipulation;
+  transition: var(--btn-transition);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--gradient-brand-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled {
+  background: var(--glass-fill-2);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-weight: var(--weight-medium);
+  background: var(--gradient-btn-secondary);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-xl);
+  color: var(--text-default);
+  touch-action: manipulation;
+  transition: var(--btn-transition);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-secondary:hover {
+  color: var(--text-on-brand);
+  border: var(--glass-border-subtle);
+  background: var(--gradient-brand-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+.btn-secondary:active { transform: translateY(0); }
+
+.btn-secondary-danger {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-weight: var(--weight-medium);
+  border: 1px solid var(--glass-border-danger-color);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-xl);
+  color: var(--feedback-error);
+  background: var(--gradient-danger-subtle);
+  touch-action: manipulation;
+  transition: var(--btn-transition);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-secondary-danger:hover {
+  background: var(--gradient-danger);
+  color: var(--text-on-brand);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+.btn-secondary-danger:active { transform: translateY(0); }
+
+.btn-danger {
+  color: var(--text-on-brand);
+  background: var(--gradient-danger);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-xl);
+  border: none;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  touch-action: manipulation;
+  transition: var(--btn-transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-danger:hover {
+  background: var(--gradient-danger-hover);
+  transform: translateY(-1px);
+}
+.btn-danger:active { transform: translateY(0); }
+
+.btn-outlined {
+  color: var(--text-link);
+  background: linear-gradient(135deg, transparent, transparent);
+  border: 1px solid var(--brand);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-xl);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: var(--btn-transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-outlined:hover {
+  background: var(--gradient-brand);
+  color: var(--text-on-brand);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.btn-outlined:active { transform: translateY(0); }
+
+.btn-outlined-danger {
+  background: linear-gradient(135deg, transparent, transparent);
+  color: var(--feedback-error);
+  border: 1px solid var(--feedback-error);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-xl);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: var(--btn-transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-outlined-danger:hover {
+  background: var(--gradient-danger);
+  color: var(--text-on-brand);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.btn-outlined-danger:active { transform: translateY(0); }
+
+/* Size modifiers for landing page contexts */
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: var(--text-base);
+}
+.btn-sm {
+  padding: 0.375rem 0.875rem;
+  font-size: var(--text-sm);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary, .btn-secondary, .btn-secondary-danger,
+  .btn-danger, .btn-outlined, .btn-outlined-danger {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+/* ================================================================
+   CARD — exact copy from card.module.css
+   ================================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-xl);
+  gap: var(--spacing-lg);
+  width: 100%;
+  min-width: 18rem;
+  background: var(--bg-card);
+  border: 2px solid var(--primary-color-light-transparent);
+  border-radius: var(--border-radius-2xl);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: fadeUp 0.4s ease-out both;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .card { padding: var(--spacing-lg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
+}
+
+/* ================================================================
+   HowItWorks tab toggle — active label
+   ================================================================ */
+#tab-patient:checked ~ div label[for="tab-patient"],
+#tab-doctor:checked ~ div label[for="tab-doctor"] {
+  background: var(--gradient-brand);
+  color: var(--text-on-brand);
+  box-shadow: var(--shadow-sm);
+}

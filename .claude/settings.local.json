@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(grep -r \"font-family\\\\|@import.*font\\\\|Google Fonts\\\\|font-weight\" /d/DevWork/encuentraDoc/src/index.css /d/DevWork/encuentraDoc/src/common/styles/*.css)",
+      "Bash(xargs -I {} basename {})"
+    ]
+  }
+}

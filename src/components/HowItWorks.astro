@@ -1,15 +1,15 @@
 ---
-const steps = [
+const patientSteps = [
   {
     number: '01',
     title: 'Crea tu perfil de paciente',
-    description: 'Regístrate gratis en minutos. Añade tu información básica y, si quieres, sube fotos o documentación relevante para que el especialista te conozca mejor.',
+    description: 'Regístrate en minutos. Añade tu información básica y, si quieres, sube fotos o documentación relevante para que el especialista te conozca mejor.',
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>`,
   },
   {
     number: '02',
     title: 'Busca y explora especialistas',
-    description: 'Filtra por especialidad y ubicación. Consulta el perfil completo de cada doctor: formación, experiencia, precios y localización de la consulta.',
+    description: 'Filtra por especialidad y ubicación. Consulta el perfil completo de cada doctor: formación, experiencia, precios y localización de la consulta en el mapa.',
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>`,
   },
   {
@@ -19,43 +19,134 @@ const steps = [
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>`,
   },
 ];
+
+const doctorSteps = [
+  {
+    number: '01',
+    title: 'Crea tu cuenta de especialista',
+    description: 'Regístrate con email o Google. La cuenta de doctor es independiente: un mismo email no puede ser paciente y doctor a la vez. El proceso tarda menos de 5 minutos.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>`,
+  },
+  {
+    number: '02',
+    title: 'Completa tu perfil profesional',
+    description: 'Añade tu número de colegiado, formación académica, certificaciones y experiencia. Indica la ubicación de tus consultas en el mapa interactivo.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>`,
+  },
+  {
+    number: '03',
+    title: 'Publica tus precios y servicios',
+    description: 'Define el precio de cada servicio. Activa la opción de financiación si la ofreces. Los pacientes ven esta información antes de contactarte.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>`,
+  },
+  {
+    number: '04',
+    title: 'Gestiona solicitudes y mensajes',
+    description: 'Desde tu panel recibes solicitudes de contacto. Tú decides si aceptar. Solo cuando aceptas se abre el canal de mensajería segura con el paciente.',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>`,
+  },
+];
 ---
 
 <section id="como-funciona" class="py-20 sm:py-28 bg-slate-50">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
-    <div class="max-w-2xl mx-auto text-center mb-16">
+    <div class="max-w-2xl mx-auto text-center mb-10">
       <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">
-        Cómo funciona para pacientes
+        Cómo funciona
       </h2>
       <p class="mt-4 text-lg text-slate-600">
-        En tres pasos sencillos, conectas con el especialista adecuado para ti.
+        Tanto si eres paciente como especialista, empezar es sencillo.
       </p>
     </div>
 
-    <!-- Steps -->
-    <div class="relative">
-      <!-- Connector line (desktop) -->
-      <div class="hidden lg:block absolute top-16 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-primary-100" aria-hidden="true"></div>
+    <!-- CSS-only tab system -->
+    <div class="how-it-works-tabs">
+      <!-- Radio inputs (hidden) -->
+      <input type="radio" name="howitworks-tab" id="tab-patient" class="sr-only" checked />
+      <input type="radio" name="howitworks-tab" id="tab-doctor" class="sr-only" />
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8">
-        {steps.map((step, i) => (
-          <div class="relative flex flex-col items-center text-center">
-            <!-- Step circle -->
-            <div class="relative z-10 w-16 h-16 rounded-full bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-200 mb-6">
-              <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={step.icon} />
-            </div>
+      <!-- Tab labels -->
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex bg-white rounded-xl border border-slate-200 p-1 shadow-sm">
+          <label
+            for="tab-patient"
+            class="tab-label px-5 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all text-slate-500 hover:text-brand-navy"
+          >
+            Soy paciente
+          </label>
+          <label
+            for="tab-doctor"
+            class="tab-label px-5 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all text-slate-500 hover:text-brand-navy"
+          >
+            Soy doctor
+          </label>
+        </div>
+      </div>
 
-            <!-- Step number badge -->
-            <span class="absolute top-0 right-1/4 lg:right-auto lg:-top-2 lg:left-[calc(50%+24px)] text-xs font-bold text-primary-400">
-              {step.number}
-            </span>
-
-            <h3 class="text-lg font-bold text-brand-navy mb-3">{step.title}</h3>
-            <p class="text-sm text-slate-600 leading-relaxed max-w-xs">{step.description}</p>
+      <!-- Patient panel -->
+      <div id="panel-patient" class="tab-panel">
+        <div class="relative">
+          <div class="hidden lg:block absolute top-16 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-primary-100" aria-hidden="true"></div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8">
+            {patientSteps.map((step) => (
+              <div class="relative flex flex-col items-center text-center">
+                <div class="relative z-10 w-16 h-16 rounded-full flex items-center justify-center mb-6" style="background: var(--gradient-brand);">
+                  <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={step.icon} />
+                </div>
+                <span class="absolute top-0 right-1/4 lg:right-auto lg:-top-2 lg:left-[calc(50%+24px)] text-xs font-bold text-primary-400">
+                  {step.number}
+                </span>
+                <h3 class="text-lg font-bold text-brand-navy mb-3">{step.title}</h3>
+                <p class="text-sm text-slate-600 leading-relaxed max-w-xs">{step.description}</p>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+      </div>
+
+      <!-- Doctor panel -->
+      <div id="panel-doctor" class="tab-panel">
+        <div class="relative">
+          <div class="hidden lg:block absolute top-16 left-1/2 -translate-x-1/2 w-3/4 h-0.5 bg-primary-100" aria-hidden="true"></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
+            {doctorSteps.map((step) => (
+              <div class="relative flex flex-col items-center text-center">
+                <div class="relative z-10 w-16 h-16 rounded-full flex items-center justify-center mb-6" style="background: var(--gradient-brand);">
+                  <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={step.icon} />
+                </div>
+                <span class="absolute top-0 right-1/4 sm:right-auto sm:-top-2 sm:left-[calc(50%+24px)] text-xs font-bold text-primary-400">
+                  {step.number}
+                </span>
+                <h3 class="text-base font-bold text-brand-navy mb-2">{step.title}</h3>
+                <p class="text-sm text-slate-600 leading-relaxed max-w-xs">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Hide panels by default; show based on checked radio sibling */
+  .tab-panel {
+    display: none;
+  }
+
+  #tab-patient:checked ~ #panel-patient {
+    display: block;
+  }
+  #tab-doctor:checked ~ #panel-doctor {
+    display: block;
+  }
+
+  /* Active tab label: radio → sibling div → label inside */
+  #tab-patient:checked ~ div label[for="tab-patient"],
+  #tab-doctor:checked ~ div label[for="tab-doctor"] {
+    background: var(--gradient-brand);
+    color: var(--text-on-brand);
+    box-shadow: var(--shadow-sm);
+  }
+</style>

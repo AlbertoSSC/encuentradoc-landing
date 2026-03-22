@@ -1,30 +1,30 @@
 ---
-const APP_URL = 'https://ed-app-henna.vercel.app';
+import { APP_ROUTES } from "../config/app";
 
 const benefits = [
   {
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>`,
-    text: 'Perfil profesional completo con CV, certificaciones y experiencia',
+    text: "Número de colegiado, CV, certificaciones y experiencia en un perfil verificado",
   },
   {
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>`,
-    text: 'Publica tus precios por servicio y opciones de financiación',
+    text: "Publica tus precios y activa financiación para tratamientos si la ofreces",
   },
   {
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>`,
-    text: 'Indica la ubicación de tus consultas en el mapa interactivo',
+    text: "Consultas en el mapa interactivo: los pacientes ven exactamente dónde trabajas",
   },
   {
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>`,
-    text: 'Mensajería segura con tus pacientes desde la plataforma',
+    text: "Solicitudes de contacto que tú aceptas — la conversación solo se abre si lo decides",
   },
   {
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>`,
-    text: 'Accede al historial fotográfico que el paciente comparte contigo',
+    text: "Accede al historial fotográfico del paciente solo cuando te autorice expresamente",
   },
   {
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>`,
-    text: 'Comparte tu perfil en redes sociales y tu web personal',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2v-1a5 5 0 00-10 0v1a2 2 0 002 2zM12 11a4 4 0 100-8 4 4 0 000 8z"/>`,
+    text: "Panel con reloj, calendario y vista previa de mensajes. Disponible como PWA",
   },
 ];
 ---
@@ -34,39 +34,63 @@ const benefits = [
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <!-- Text -->
       <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-xs font-semibold text-primary-300 bg-primary-900/50 rounded-full">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-xs font-semibold text-primary-300 bg-primary-900/50 rounded-full"
+        >
           <span class="w-1.5 h-1.5 rounded-full bg-primary-400"></span>
           Para profesionales de la salud
         </div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-          Gestiona tu presencia digital como especialista
+        <h2
+          class="text-3xl sm:text-4xl font-extrabold text-white leading-tight"
+        >
+          Gestiona tu consulta con herramientas pensadas para médicos
         </h2>
         <p class="mt-4 text-lg text-slate-300 leading-relaxed">
-          Crea tu perfil profesional completo y llega a pacientes que buscan exactamente tu especialidad.
-          Sin cuotas mensuales, sin comisiones por consulta.
+          Panel de control completo. Llega a pacientes que buscan exactamente tu
+          especialidad y gestiona las solicitudes desde una sola pantalla.
         </p>
 
-        <a
-          href={`${APP_URL}/signin`}
-          class="mt-8 inline-flex items-center px-7 py-4 text-base font-semibold text-brand-navy bg-white rounded-xl hover:bg-primary-50 transition-all shadow-lg shadow-black/20"
-        >
+        <a href={APP_ROUTES.signin} class="mt-8 btn-primary btn-lg">
           Registrarme como doctor
-          <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
           </svg>
         </a>
       </div>
 
       <!-- Benefits list -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {benefits.map((benefit) => (
-          <div class="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
-            <div class="w-8 h-8 rounded-lg bg-primary-500/20 flex items-center justify-center shrink-0 mt-0.5">
-              <svg class="w-4 h-4 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={benefit.icon} />
+        {
+          benefits.map((benefit) => (
+            <div
+              class="card"
+              style="padding: 1rem; flex-direction: row; align-items: flex-start; gap: 0.75rem; min-width: 0; background: var(--glass-fill-brand); border: var(--glass-border-brand);"
+            >
+              <div
+                class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                style="background: var(--gradient-brand);"
+              >
+                <svg
+                  class="w-4 h-4 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  set:html={benefit.icon}
+                />
+              </div>
+              <p class="text-sm text-slate-300 leading-snug">{benefit.text}</p>
             </div>
-            <p class="text-sm text-slate-300 leading-snug">{benefit.text}</p>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </div>

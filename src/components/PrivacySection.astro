@@ -1,0 +1,51 @@
+---
+const items = [
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>`,
+    title: 'Solo el doctor que tú contactes puede ver tu historial',
+    desc: 'Cuando envías una solicitud de contacto, el doctor la recibe pero no puede acceder a tus datos hasta que la relación esté establecida y tú lo hayas autorizado.',
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/>`,
+    title: 'Acceso revocable en cualquier momento',
+    desc: 'Puedes cancelar el acceso de cualquier doctor a tu perfil y documentación cuando quieras. El control es tuyo, no del médico ni de la plataforma.',
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>`,
+    title: 'Fotos médicas con conversión automática',
+    desc: 'Sube fotos en cualquier formato, incluyendo HEIC desde iPhone. Se convierten automáticamente a WebP para máxima compatibilidad con todos los dispositivos.',
+  },
+];
+---
+
+<section class="py-20 sm:py-28">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">
+        Tu privacidad, bajo tu control
+      </h2>
+      <p class="mt-4 text-lg text-slate-600 max-w-xl mx-auto">
+        EncuentraDoc invierte el modelo tradicional: no es el doctor quien decide qué ve, eres tú
+        quien decide qué médicos pueden acceder a tu perfil y documentación médica.
+      </p>
+    </div>
+
+    <!-- Feature rows -->
+    <div class="space-y-8">
+      {items.map((item) => (
+        <div class="card" style="min-width: 0;">
+          <div class="flex items-start gap-5">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style="background: var(--gradient-brand);">
+              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={item.icon} />
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-brand-navy mb-1">{item.title}</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
