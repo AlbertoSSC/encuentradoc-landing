@@ -1,27 +1,59 @@
 ---
-import { APP_ROUTES } from '../config/app';
+import { APP_ROUTES } from "../config/app";
+import FAQ from "./FAQ.astro";
 ---
 
-<section data-cta-section class="py-20 sm:py-28 bg-gradient-to-br from-brand-dark via-brand-navy to-brand-dark">
+<section
+  data-cta-section
+  class="py-20 sm:py-28 bg-gradient-to-br from-brand-dark via-brand-navy to-brand-dark"
+>
   <div data-cta class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
-      Empieza hoy.
-    </h2>
-    <p class="mt-4 text-lg max-w-xl mx-auto" style="color: var(--text-on-inverse);">
-      EncuentraDoc conecta pacientes con especialistas de forma directa y segura.
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Empieza hoy.</h2>
+    <p
+      class="mt-4 text-lg max-w-xl mx-auto"
+      style="color: var(--text-on-inverse);"
+    >
+      EncuentraDoc conecta pacientes con especialistas de forma directa y
+      segura.
     </p>
 
-    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href={APP_ROUTES.signin} class="w-full sm:w-auto btn-primary btn-lg" style="flex-direction: column;">
-        <span>Soy paciente. Buscar especialista</span>
+    <div
+      class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+    >
+      <a
+        href={APP_ROUTES.signin}
+        class="w-full btn-primary btn-lg"
+        style="flex-direction: column;"
+      >
+        <span>Soy paciente</span>
       </a>
-      <a href={APP_ROUTES.signin} class="w-full sm:w-auto btn-outlined btn-lg">
-        Soy doctor. Crear mi perfil
+      <a
+        href={APP_ROUTES.signin}
+        class="w-full btn-secondary btn-lg doctor-link"
+      >
+        Soy doctor
       </a>
     </div>
 
-    <p class="mt-6 text-sm" style="color: var(--text-on-inverse); opacity: 0.7;">
-      También puedes instalarlo directamente en tu móvil desde el navegador — sin App Store.
+    <p
+      class="mt-6 text-sm"
+      style="color: var(--text-on-inverse); opacity: 0.7;"
+    >
+      También puedes instalarlo directamente en tu móvil desde el navegador —
+      sin App Store.
     </p>
   </div>
+
+  <FAQ />
 </section>
+
+<style>
+  .doctor-link {
+    color: var(--text-on-inverse);
+    background: var(--gradient-brand-dark);
+    border: none;
+  }
+  .doctor-link:hover {
+    background: var(--gradient-brand-light);
+  }
+</style>

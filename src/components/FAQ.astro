@@ -1,125 +1,190 @@
 ---
 const faqs = [
   {
-    q: '¿Qué especialidades puedo encontrar en EncuentraDoc?',
-    a: 'EncuentraDoc no limita las especialidades: cualquier médico colegiado puede crear su perfil. Encontrarás especialistas en cardiología, dermatología, traumatología, ginecología, psicología, pediatría y muchas otras áreas. Puedes filtrar por especialidad y ubicación para encontrar el profesional más adecuado para ti.',
+    q: "¿Qué especialidades puedo encontrar en EncuentraDoc?",
+    a: "EncuentraDoc no limita las especialidades: cualquier médico colegiado puede crear su perfil. Encontrarás especialistas en cardiología, dermatología, traumatología, ginecología, psicología, pediatría y muchas otras áreas. Puedes filtrar por especialidad y ubicación para encontrar el profesional más adecuado para ti.",
   },
   {
-    q: '¿Cómo se verifica que los doctores son reales?',
-    a: 'Cada doctor indica su número de colegiado en su perfil. Recomendamos verificar la colegiación en el registro oficial antes de iniciar cualquier relación médica. Los perfiles con información incompleta aparecen diferenciados.',
+    q: "¿Cómo se verifica que los doctores son reales?",
+    a: "Cada doctor indica su número de colegiado en su perfil. Recomendamos verificar la colegiación en el registro oficial antes de iniciar cualquier relación médica. Los perfiles con información incompleta aparecen diferenciados.",
   },
   {
-    q: '¿EncuentraDoc sirve para hacer consultas médicas online?',
-    a: 'EncuentraDoc es una plataforma de conexión y comunicación. El canal de mensajería permite intercambiar información con el especialista, pero no sustituye a la consulta médica presencial. El doctor decide cómo gestionar su relación con cada paciente.',
+    q: "¿EncuentraDoc sirve para hacer consultas médicas online?",
+    a: "EncuentraDoc es una plataforma de conexión y comunicación. El canal de mensajería permite intercambiar información con el especialista, pero no sustituye a la consulta médica presencial. El doctor decide cómo gestionar su relación con cada paciente.",
   },
   {
-    q: '¿Cómo funciona el sistema de solicitudes de contacto?',
-    a: 'Como paciente, puedes ver el perfil completo de cualquier doctor sin restricciones. Si quieres iniciar una conversación, envías una solicitud de contacto. El doctor la recibe en su panel y decide si aceptarla. Solo cuando acepta se abre el canal de mensajería entre ambos. Esto protege tanto al paciente como al médico.',
+    q: "¿Cómo funciona el sistema de solicitudes de contacto?",
+    a: "Como paciente, puedes ver el perfil completo de cualquier doctor sin restricciones. Si quieres iniciar una conversación, envías una solicitud de contacto. El doctor la recibe en su panel y decide si aceptarla. Solo cuando acepta se abre el canal de mensajería entre ambos. Esto protege tanto al paciente como al médico.",
   },
   {
-    q: '¿Quién puede ver mi información como paciente?',
-    a: 'Solo los doctores a quienes tú autorices explícitamente pueden acceder a tu perfil y documentación. Tienes control total sobre tu privacidad y puedes revocar el acceso en cualquier momento.',
+    q: "¿Quién puede ver mi información como paciente?",
+    a: "Solo los doctores a quienes tú autorices explícitamente pueden acceder a tu perfil y documentación. Tienes control total sobre tu privacidad y puedes revocar el acceso en cualquier momento.",
   },
   {
-    q: '¿Cómo funciona el registro para doctores?',
-    a: 'El registro de doctor es independiente del de paciente y usa el mismo sistema de autenticación. Un mismo email no puede estar registrado como paciente y como doctor simultáneamente. El proceso tarda menos de 5 minutos.',
+    q: "¿Cómo funciona el registro para doctores?",
+    a: "El registro de doctor es independiente del de paciente y usa el mismo sistema de autenticación. Un mismo email no puede estar registrado como paciente y como doctor simultáneamente. El proceso tarda menos de 5 minutos.",
   },
   {
-    q: '¿EncuentraDoc tiene app móvil?',
-    a: 'La aplicación es una Progressive Web App (PWA), lo que significa que funciona en cualquier dispositivo desde el navegador y puede instalarse en la pantalla de inicio de tu móvil como si fuera una app nativa, sin pasar por la App Store.',
+    q: "¿EncuentraDoc tiene app móvil?",
+    a: "La aplicación es una Progressive Web App (PWA), lo que significa que funciona en cualquier dispositivo desde el navegador y puede instalarse en la pantalla de inicio de tu móvil como si fuera una app nativa, sin pasar por la App Store.",
   },
   {
-    q: '¿La aplicación tiene modo oscuro?',
-    a: 'Sí. EncuentraDoc incluye tema claro, oscuro y automático (sigue el ajuste del sistema operativo). Puedes cambiarlo en cualquier momento desde los ajustes de la aplicación.',
+    q: "¿La aplicación tiene modo oscuro?",
+    a: "Sí. EncuentraDoc incluye tema claro, oscuro y automático (sigue el ajuste del sistema operativo). Puedes cambiarlo en cualquier momento desde los ajustes de la aplicación.",
   },
 ];
 ---
 
-<section id="faq" class="py-20 sm:py-28">
+<section id="faq" class="pt-20 pb-0">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">
-        Preguntas frecuentes
-      </h2>
-      <p class="mt-4 text-lg text-slate-600">
-        ¿Tienes dudas? Aquí están las respuestas más habituales.
-      </p>
-    </div>
+    <div class="card faq-card">
+      <!-- Desplegable exterior: cerrado por defecto -->
+      <details class="faq-outer">
+        <summary class="faq-outer-summary">
+          <span class="faq-outer-label">Preguntas frecuentes</span>
+          <svg
+            class="faq-outer-icon"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </summary>
 
-    <!-- FAQ list — mirrors app's FaqItem: Card > details > summary + answerContent -->
-    <div class="space-y-3">
-      {faqs.map((faq) => (
-        <div class="card faq-card">
-          <details class="faq-details">
-            <summary class="faq-summary">
-              <h3 class="faq-question">{faq.q}</h3>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </summary>
-            <div class="faq-answer-content">
-              <p class="faq-answer">{faq.a}</p>
-            </div>
-          </details>
+        <div class="px-5 pb-5">
+          {
+            faqs.map((faq) => (
+              <details class="faq-details">
+                <summary class="faq-summary">
+                  <span class="faq-question">{faq.q}</span>
+                  <svg
+                    class="faq-icon"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </summary>
+                <div class="faq-answer-content">
+                  <p class="faq-answer">{faq.a}</p>
+                </div>
+              </details>
+            ))
+          }
         </div>
-      ))}
+      </details>
     </div>
   </div>
 </section>
 
 <style>
-  /* Card overrides to match app's .faqCard */
+  /* — Desplegable exterior — */
   .faq-card {
-    padding: var(--spacing-lg);
-    min-width: 0;
+    padding: var(--spacing-md);
+    background: var(--glass-fill-brand);
+    border: var(--glass-border-brand);
   }
 
-  /* details — width: 100% como en la app */
+  .faq-outer {
+    width: 100%;
+  }
+
+  .faq-outer-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    gap: 0.5rem;
+    width: 100%;
+    cursor: pointer;
+    list-style: none;
+  }
+  color: var(--brand-on-brand);
+  .faq-outer-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-outer-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brand-on-brand);
+    opacity: 0.7;
+  }
+  .faq-outer-summary:hover .faq-outer-label {
+    opacity: 1;
+  }
+
+  .faq-outer-icon {
+    color: var(--brand-on-brand);
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .faq-outer[open] .faq-outer-icon {
+    transform: rotate(-180deg);
+  }
+
+  /* — Items individuales — */
   .faq-details {
     width: 100%;
   }
 
-  /* summary — flex space-between, sin marker nativo */
   .faq-summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     list-style: none;
-    gap: var(--spacing-sm);
+    gap: 1rem;
+    padding: 0.625rem 0;
   }
-  .faq-summary::-webkit-details-marker { display: none; }
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
 
-  /* Pregunta */
   .faq-question {
-    font-weight: var(--weight-semibold);
-    color: var(--text-default);
-    font-size: var(--text-base);
-    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-on-inverse);
     text-align: left;
+    line-height: 1.5;
   }
 
-  /* Icono chevron — rota -180deg al abrir (igual que la app) */
   .faq-icon {
-    color: var(--text-subtle);
-    transition: transform 0.3s ease-in-out;
+    color: var(--text-on-inverse);
+    opacity: 0.4;
+    transition: transform 0.2s ease;
     flex-shrink: 0;
   }
   .faq-details[open] .faq-icon {
     transform: rotate(-180deg);
+    opacity: 0.7;
   }
 
-  /* Respuesta — border-top brand igual que la app (border-primary = border-brand) */
   .faq-answer-content {
-    margin-top: var(--spacing-md);
-    padding-top: var(--spacing-md);
-    border-top: 1px solid var(--border-brand);
+    padding-bottom: 0.75rem;
   }
   .faq-answer {
-    color: var(--text-subtle);
-    font-size: var(--text-base);
-    line-height: 1.6;
+    opacity: 0.9;
+    color: var(--text-on-inverse);
+    font-weight: 100;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    letter-spacing: 0.02em;
     margin: 0;
   }
 </style>

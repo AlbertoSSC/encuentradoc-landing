@@ -201,33 +201,7 @@ header.navbar--scrolled {
 
 /* ── Button enhancements ─────────────────────────────────────────── */
 
-/* Shimmer sweep on .btn-primary hover */
-.btn-primary {
-  position: relative;
-  overflow: hidden;
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      108deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.22) 50%,
-      transparent 70%
-    );
-    transform: translateX(-120%) skewX(-12deg);
-    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    border-radius: inherit;
-  }
-
-  .btn-primary:hover::after {
-    transform: translateX(220%) skewX(-12deg);
-  }
-
   /* Attention pulse on the Hero primary CTA only —
      starts after Hero entrance completes (~1.2s) */
   [data-hero-cta] .btn-primary {
