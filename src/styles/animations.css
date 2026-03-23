@@ -1,0 +1,258 @@
+/* ================================================================
+   EncuentraDoc — Animation System
+   Overrides design-system.css auto-animations; delegates to GSAP
+   ================================================================ */
+
+/* ── Override .card auto-animation, GSAP handles reveal ─────────── */
+/* animation:none always — disables design-system's CSS fadeUp for everyone */
+.card {
+  animation: none;
+}
+
+/* Hiding is JS-dependent: only applied when JS has loaded (.js-animations
+   added synchronously in <head> before first paint) */
+.js-animations .card {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-animations .card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ── Hero blobs: slow CSS drift in brand colors ──────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-blob-1 {
+    animation: blob-drift-1 18s ease-in-out infinite;
+  }
+
+  .hero-blob-2 {
+    animation: blob-drift-2 22s ease-in-out infinite;
+  }
+
+  @keyframes blob-drift-1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(30px, -20px) scale(1.05);
+    }
+    66% {
+      transform: translate(-20px, 15px) scale(0.97);
+    }
+  }
+
+  @keyframes blob-drift-2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    40% {
+      transform: translate(-25px, 20px) scale(1.08);
+    }
+    70% {
+      transform: translate(15px, -10px) scale(0.95);
+    }
+  }
+}
+
+/* ── CTA animated gradient shift ────────────────────────────────── */
+[data-cta-section] {
+  background-size: 200% 200% !important;
+  animation: gradient-shift 7s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-cta-section] {
+    animation: none;
+    background-size: 100% 100% !important;
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ── FAQ content open animation ─────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  details[open] > .faq-answer-content {
+    animation: faq-open 0.25s ease-out both;
+  }
+
+  @keyframes faq-open {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ── HowItWorks vertical path + step elements ────────────────────── */
+[data-hiw-progress] {
+  will-change: transform;
+}
+
+/* Pre-hide animated elements — only when JS is active */
+.js-animations [data-hiw-node],
+.js-animations [data-hiw-step-content] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hiw-progress] {
+    transform: scaleY(1) !important;
+  }
+  [data-hiw-node],
+  [data-hiw-step-content] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ── Navbar scrolled state ───────────────────────────────────────── */
+header {
+  transition: box-shadow 250ms ease, background-color 250ms ease;
+}
+
+header.navbar--scrolled {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 1px 16px 0 rgba(30, 58, 95, 0.08);
+}
+
+/* ── TrustBar fullscreen carousel ───────────────────────────────── */
+
+/* GPU hint — transforms + opacity driven by GSAP onUpdate each frame */
+.trustbar-card {
+  will-change: transform, opacity;
+}
+
+/* Prevent flash before JS sets initial transforms — only when JS is active */
+.js-animations .trustbar-card:not([data-card-index="0"]) {
+  opacity: 0;
+  transform: translateX(100%) scale(0.28);
+}
+
+/* reduced-motion: stack cards vertically, each full-height */
+@media (prefers-reduced-motion: reduce) {
+  [data-trustbar] {
+    height: auto !important;
+  }
+
+  [data-trustbar-inner] {
+    position: relative !important;
+    display: flex;
+    flex-direction: column;
+    overflow: visible !important;
+  }
+
+  .trustbar-card {
+    position: relative !important;
+    flex-shrink: 0;
+    height: 100svh;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Dots are meaningless in the stacked fallback layout */
+  [data-trustbar-dots] {
+    display: none !important;
+  }
+
+}
+
+
+/* ── 3D mockup tilt ──────────────────────────────────────────────── */
+.mockup-scene {
+  perspective: 1200px;
+}
+
+.mockup-3d {
+  will-change: transform;
+  filter: drop-shadow(0 28px 52px rgba(14, 30, 60, 0.18));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mockup-3d {
+    transform: none !important;
+    filter: none;
+  }
+}
+
+/* ── Remove native smooth-scroll; Lenis takes over ──────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Button enhancements ─────────────────────────────────────────── */
+
+/* Shimmer sweep on .btn-primary hover */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      108deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 70%
+    );
+    transform: translateX(-120%) skewX(-12deg);
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .btn-primary:hover::after {
+    transform: translateX(220%) skewX(-12deg);
+  }
+
+  /* Attention pulse on the Hero primary CTA only —
+     starts after Hero entrance completes (~1.2s) */
+  [data-hero-cta] .btn-primary {
+    animation: hero-cta-pulse 3.8s ease-in-out 1.2s infinite;
+  }
+
+  /* Stop pulse on hover so hover effects take over cleanly */
+  [data-hero-cta] .btn-primary:hover {
+    animation: none;
+  }
+
+  @keyframes hero-cta-pulse {
+    0%, 60%, 100% {
+      box-shadow: var(--shadow-md);
+    }
+    30% {
+      box-shadow: var(--shadow-lg), 0 0 26px rgba(3, 140, 209, 0.38);
+    }
+  }
+}
+
+/* Enhanced active state — subtle press feel */
+.btn-primary:active,
+.btn-secondary:active,
+.btn-outlined:active {
+  transform: translateY(1px) scale(0.99) !important;
+  transition: transform 80ms ease !important;
+}

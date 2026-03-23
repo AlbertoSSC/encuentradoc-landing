@@ -1,42 +1,258 @@
 ---
-const items = [
-  {
-    label: 'Directo',
-    desc: 'Sin intermediarios ni llamadas',
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>`,
-  },
-  {
-    label: 'Verificados',
-    desc: 'Número de colegiado visible',
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>`,
-  },
-  {
-    label: 'PWA',
-    desc: 'Instala en tu móvil, sin App Store',
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>`,
-  },
-  {
-    label: 'Privacidad',
-    desc: 'Tú decides quién ve tu historial',
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>`,
-  },
-];
+// TrustBar: fullscreen editorial carousel — large title left, illustration right.
+// Active card = full viewport; next card = small preview peeking from the right.
 ---
 
-<div class="py-8 bg-white border-y border-slate-100">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4">
-      {items.map((item, i) => (
-        <div class={`flex flex-col items-center text-center gap-2 ${i < items.length - 1 ? 'sm:border-r sm:border-slate-100' : ''}`}>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: var(--gradient-brand);">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={item.icon} />
-          </div>
-          <div>
-            <p class="text-sm font-bold text-brand-navy">{item.label}</p>
-            <p class="text-xs text-slate-500 mt-0.5">{item.desc}</p>
+<section data-trustbar class="relative bg-brand-dark" style="height: 100vh;">
+  <div data-trustbar-inner class="absolute inset-0 overflow-hidden">
+
+    <!-- ── Card 0: Directo ───────────────────────────────────────────── -->
+    <div class="trustbar-card absolute inset-0 bg-brand-dark" data-card-index="0">
+      <div class="absolute inset-0 flex flex-col lg:flex-row">
+
+        <!-- Left: editorial text -->
+        <div class="flex flex-col justify-center px-8 sm:px-12 lg:px-16 xl:px-24 pt-20 pb-10 lg:py-0 lg:w-[44%] shrink-0 text-center lg:text-left order-2 lg:order-1 relative z-10">
+          <span class="font-mono text-6xl sm:text-7xl lg:text-8xl font-black text-white/[0.06] leading-none select-none block -mb-4 -ml-1">01</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight mb-4">
+            Directo
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-sm mx-auto lg:mx-0 mb-6">
+            Contacta directamente con el especialista que eliges. Sin llamadas, sin intermediarios, sin esperas.
+          </p>
+          <div class="flex justify-center lg:justify-start">
+            <a href="#funcionalidades" class="inline-flex items-center gap-2 text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors">
+              Saber más
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
           </div>
         </div>
-      ))}
+
+        <!-- Right: illustration -->
+        <div class="flex-1 flex items-center justify-center p-8 lg:p-12 order-1 lg:order-2 relative overflow-hidden">
+          <!-- Gradient blend: left edge fades into card bg -->
+          <div class="absolute top-0 left-0 bottom-0 w-16 lg:w-24 bg-gradient-to-r from-brand-dark to-transparent pointer-events-none z-10"></div>
+          <div class="w-64 sm:w-72 lg:w-80 xl:w-96 bg-white rounded-3xl shadow-2xl overflow-hidden select-none pointer-events-none">
+            <div class="flex items-center gap-2.5 px-4 py-3 border-b border-slate-100 bg-slate-50">
+              <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-[10px] font-bold text-primary-700 shrink-0">GL</div>
+              <div>
+                <p class="text-sm font-semibold text-brand-navy">Dr. García López</p>
+                <p class="text-[10px] text-primary-500 font-medium">● En línea</p>
+              </div>
+            </div>
+            <div class="p-4 space-y-3">
+              <div class="flex items-end gap-2">
+                <div class="w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center text-[9px] font-bold text-primary-700 shrink-0">GL</div>
+                <div class="max-w-[75%] bg-slate-100 rounded-2xl rounded-bl-sm px-3 py-2 text-xs text-slate-700 leading-relaxed">Hola, he revisado la documentación. Le recomendaría una consulta presencial.</div>
+              </div>
+              <div class="flex items-end gap-2 flex-row-reverse">
+                <div class="w-6 h-6 rounded-full bg-primary-600 flex items-center justify-center text-[9px] font-bold text-white shrink-0">Tú</div>
+                <div class="max-w-[75%] bg-primary-600 rounded-2xl rounded-br-sm px-3 py-2 text-xs text-white leading-relaxed">Muchas gracias doctor, ¿cuándo tiene disponibilidad?</div>
+              </div>
+              <div class="flex items-end gap-2">
+                <div class="w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center text-[9px] font-bold text-primary-700 shrink-0">GL</div>
+                <div class="max-w-[75%] bg-slate-100 rounded-2xl rounded-bl-sm px-3 py-2 text-xs text-slate-700 leading-relaxed">El jueves a las 17:00 tengo hueco. ¿Le viene bien?</div>
+              </div>
+            </div>
+            <div class="border-t border-slate-100 px-3 py-2.5 bg-white">
+              <div class="flex items-center gap-2 bg-slate-50 rounded-xl px-3 py-2">
+                <div class="flex-1 text-[10px] text-slate-300">Escribe un mensaje...</div>
+                <div class="w-6 h-6 rounded-lg bg-primary-600 flex items-center justify-center shrink-0">
+                  <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <!-- ── Card 1: Verificados ────────────────────────────────────────── -->
+    <div class="trustbar-card absolute inset-0 bg-brand-dark" data-card-index="1">
+      <div class="absolute inset-0 flex flex-col lg:flex-row">
+
+        <div class="flex flex-col justify-center px-8 sm:px-12 lg:px-16 xl:px-24 pt-20 pb-10 lg:py-0 lg:w-[44%] shrink-0 text-center lg:text-left order-2 lg:order-1 relative z-10">
+          <span class="font-mono text-6xl sm:text-7xl lg:text-8xl font-black text-white/[0.06] leading-none select-none block -mb-4 -ml-1">02</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight mb-4">
+            Verificados
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-sm mx-auto lg:mx-0 mb-6">
+            Cada perfil muestra el número de colegiado oficial. Sabes exactamente quién es el profesional antes de escribirle.
+          </p>
+          <div class="flex justify-center lg:justify-start">
+            <a href="#funcionalidades" class="inline-flex items-center gap-2 text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors">
+              Saber más
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="flex-1 flex items-center justify-center p-8 lg:p-12 order-1 lg:order-2 relative overflow-hidden">
+          <div class="absolute top-0 left-0 bottom-0 w-16 lg:w-24 bg-gradient-to-r from-brand-dark to-transparent pointer-events-none z-10"></div>
+          <div class="w-64 sm:w-72 lg:w-80 bg-white rounded-3xl shadow-2xl overflow-hidden select-none pointer-events-none">
+            <div class="h-24 bg-gradient-to-br from-primary-100 to-primary-50 relative">
+              <div class="w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center text-xl font-bold text-primary-700 border-4 border-white absolute -bottom-8 left-5">GL</div>
+            </div>
+            <div class="pt-10 px-5 pb-5">
+              <div class="flex items-center justify-between mb-1">
+                <p class="text-base font-bold text-brand-navy">Dr. García López</p>
+                <div class="flex items-center gap-1 bg-primary-50 border border-primary-200 rounded-full px-2 py-0.5">
+                  <svg class="w-3 h-3 text-primary-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                  <span class="text-[10px] font-semibold text-primary-700">Verificado</span>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 mb-1">Cardiólogo</p>
+              <p class="text-[11px] text-slate-400 mb-4">Col. nº 28-12345 · Madrid</p>
+              <div class="flex gap-2 mb-4">
+                <div class="flex-1 bg-slate-50 rounded-xl p-2.5 text-center border border-slate-100">
+                  <p class="text-base font-bold text-brand-navy">4.9</p>
+                  <p class="text-[10px] text-slate-400">Valoración</p>
+                </div>
+                <div class="flex-1 bg-slate-50 rounded-xl p-2.5 text-center border border-slate-100">
+                  <p class="text-base font-bold text-brand-navy">12+</p>
+                  <p class="text-[10px] text-slate-400">Años exp.</p>
+                </div>
+                <div class="flex-1 bg-slate-50 rounded-xl p-2.5 text-center border border-slate-100">
+                  <p class="text-base font-bold text-brand-navy">80€</p>
+                  <p class="text-[10px] text-slate-400">Consulta</p>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <div class="flex-1 h-8 bg-slate-100 rounded-lg"></div>
+                <div class="flex-1 h-8 bg-primary-600 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Card 2: PWA ─────────────────────────────────────────────────── -->
+    <div class="trustbar-card absolute inset-0 bg-brand-dark" data-card-index="2">
+      <div class="absolute inset-0 flex flex-col lg:flex-row">
+
+        <div class="flex flex-col justify-center px-8 sm:px-12 lg:px-16 xl:px-24 pt-20 pb-10 lg:py-0 lg:w-[44%] shrink-0 text-center lg:text-left order-2 lg:order-1 relative z-10">
+          <span class="font-mono text-6xl sm:text-7xl lg:text-8xl font-black text-white/[0.06] leading-none select-none block -mb-4 -ml-1">03</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight mb-4">
+            PWA
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-sm mx-auto lg:mx-0 mb-6">
+            Instala EncuentraDoc en tu móvil directamente desde el navegador. Sin App Store ni Google Play.
+          </p>
+          <div class="flex justify-center lg:justify-start">
+            <a href="#funcionalidades" class="inline-flex items-center gap-2 text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors">
+              Saber más
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="flex-1 flex items-center justify-center p-8 lg:p-12 order-1 lg:order-2 relative overflow-hidden">
+          <div class="absolute top-0 left-0 bottom-0 w-16 lg:w-24 bg-gradient-to-r from-brand-dark to-transparent pointer-events-none z-10"></div>
+          <div class="w-64 sm:w-72 lg:w-72 bg-white rounded-3xl shadow-2xl overflow-hidden select-none pointer-events-none">
+            <div class="flex items-center gap-1.5 px-4 py-3 bg-slate-50 border-b border-slate-100">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-300"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-300"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-300"></span>
+              <div class="flex-1 ml-2 h-5 bg-white border border-slate-200 rounded-full text-[9px] text-slate-400 flex items-center px-3">encuentradoc.com</div>
+            </div>
+            <div class="p-6 flex flex-col items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-200/60">
+                <svg class="w-9 h-9 text-white" viewBox="0 0 32 32" fill="none">
+                  <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                  <path d="M16 8v16M8 16h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="text-center">
+                <p class="text-sm font-bold text-brand-navy mb-1">Añadir a pantalla de inicio</p>
+                <p class="text-xs text-slate-400">encuentradoc.com</p>
+              </div>
+              <div class="w-full bg-primary-600 rounded-xl py-2.5 text-center text-sm font-semibold text-white">Instalar</div>
+              <div class="w-full bg-slate-50 rounded-xl py-2.5 text-center text-sm font-medium text-slate-500 border border-slate-100">Ahora no</div>
+              <p class="text-[10px] text-slate-300 text-center">Sin App Store · Sin Google Play</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Card 3: Privacidad ──────────────────────────────────────────── -->
+    <div class="trustbar-card absolute inset-0 bg-brand-dark" data-card-index="3">
+      <div class="absolute inset-0 flex flex-col lg:flex-row">
+
+        <div class="flex flex-col justify-center px-8 sm:px-12 lg:px-16 xl:px-24 pt-20 pb-10 lg:py-0 lg:w-[44%] shrink-0 text-center lg:text-left order-2 lg:order-1 relative z-10">
+          <span class="font-mono text-6xl sm:text-7xl lg:text-8xl font-black text-white/[0.06] leading-none select-none block -mb-4 -ml-1">04</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight mb-4">
+            Privacidad
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-sm mx-auto lg:mx-0 mb-6">
+            Tú decides quién puede ver tu historial médico. Control total sobre tu información, siempre bajo tu mando.
+          </p>
+          <div class="flex justify-center lg:justify-start">
+            <a href="#funcionalidades" class="inline-flex items-center gap-2 text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors">
+              Saber más
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="flex-1 flex items-center justify-center p-8 lg:p-12 order-1 lg:order-2 relative overflow-hidden">
+          <div class="absolute top-0 left-0 bottom-0 w-16 lg:w-24 bg-gradient-to-r from-brand-dark to-transparent pointer-events-none z-10"></div>
+          <div class="w-64 sm:w-72 lg:w-80 bg-white rounded-3xl shadow-2xl overflow-hidden select-none pointer-events-none">
+            <div class="flex items-center gap-2.5 px-5 py-4 border-b border-slate-100">
+              <div class="w-8 h-8 rounded-lg bg-primary-100 border border-primary-200 flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <p class="text-sm font-bold text-brand-navy">Privacidad y Datos</p>
+            </div>
+            <div class="p-5 space-y-4">
+              {[
+                { label: 'Compartir historial', sub: 'Solo médicos verificados', on: true },
+                { label: 'Notificaciones', sub: 'Solo mensajes directos', on: true },
+                { label: 'Datos de localización', sub: 'Para búsquedas cercanas', on: false },
+                { label: 'Marketing', sub: 'Comunicaciones comerciales', on: false },
+              ].map((row) => (
+                <div class="flex items-center justify-between gap-3">
+                  <div class="min-w-0">
+                    <p class="text-xs font-semibold text-brand-navy">{row.label}</p>
+                    <p class="text-[10px] text-slate-400">{row.sub}</p>
+                  </div>
+                  <div class={`w-9 h-5 rounded-full shrink-0 flex items-center px-0.5 ${row.on ? 'bg-primary-500 justify-end' : 'bg-slate-200 justify-start'}`}>
+                    <div class="w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="px-5 pb-5">
+              <div class="bg-primary-50 border border-primary-200 rounded-xl px-4 py-2.5 text-[11px] text-primary-700 font-medium text-center">
+                Tus datos nunca se venden a terceros
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Progress dots overlay -->
+    <div data-trustbar-dots
+         class="absolute bottom-6 right-8 sm:right-12 lg:right-16 z-[60] flex items-center gap-2"
+         aria-hidden="true">
+      <div data-dot="0" class="h-1 rounded-full transition-all duration-300" style="width:1.5rem; background-color:rgba(255,255,255,0.9);"></div>
+      <div data-dot="1" class="h-1 rounded-full transition-all duration-300" style="width:0.375rem; background-color:rgba(255,255,255,0.3);"></div>
+      <div data-dot="2" class="h-1 rounded-full transition-all duration-300" style="width:0.375rem; background-color:rgba(255,255,255,0.3);"></div>
+      <div data-dot="3" class="h-1 rounded-full transition-all duration-300" style="width:0.375rem; background-color:rgba(255,255,255,0.3);"></div>
+    </div>
+
   </div>
-</div>
+</section>

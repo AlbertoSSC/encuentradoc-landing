@@ -4,7 +4,8 @@
       "Bash(xargs wc:*)",
       "WebSearch",
       "Bash(grep -rn \"backdrop-filter\\\\|fadeUp\\\\|\\\\.card\" D:/DevWork/encuentraDoc/src --include=*.css -l)",
-      "Bash(grep -rn \"<details\\\\|<summary\" D:/DevWork/encuentraDoc/src --include=*.tsx --include=*.jsx --include=*.astro -l)"
+      "Bash(grep -rn \"<details\\\\|<summary\" D:/DevWork/encuentraDoc/src --include=*.tsx --include=*.jsx --include=*.astro -l)",
+      "Bash(npm install:*)"
     ]
   }
 }

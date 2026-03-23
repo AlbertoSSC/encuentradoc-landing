@@ -7,7 +7,7 @@ import { APP_ROUTES } from '../config/app';
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
       <!-- Brand -->
-      <div class="col-span-1 sm:col-span-2 lg:col-span-1">
+      <div data-footer-col class="col-span-1 sm:col-span-2 lg:col-span-1">
         <a href="/" class="flex items-center gap-2 mb-4">
           <svg class="w-7 h-7 text-primary-500" viewBox="0 0 32 32" fill="none">
             <circle cx="16" cy="16" r="16" fill="currentColor" opacity="0.15"/>
@@ -24,7 +24,7 @@ import { APP_ROUTES } from '../config/app';
       </div>
 
       <!-- Pacientes -->
-      <div>
+      <div data-footer-col>
         <h4 class="text-sm font-semibold text-white mb-3">Pacientes</h4>
         <ul class="space-y-2 text-sm">
           <li><a href={APP_ROUTES.signin} class="hover:text-white transition-colors">Registrarse</a></li>
@@ -35,7 +35,7 @@ import { APP_ROUTES } from '../config/app';
       </div>
 
       <!-- Doctores -->
-      <div>
+      <div data-footer-col>
         <h4 class="text-sm font-semibold text-white mb-3">Doctores</h4>
         <ul class="space-y-2 text-sm">
           <li><a href={APP_ROUTES.signin} class="hover:text-white transition-colors">Crear perfil</a></li>
@@ -45,7 +45,7 @@ import { APP_ROUTES } from '../config/app';
       </div>
 
       <!-- Legal -->
-      <div>
+      <div data-footer-col>
         <h4 class="text-sm font-semibold text-white mb-3">Legal</h4>
         <ul class="space-y-2 text-sm">
           <li><a href="/privacidad" class="hover:text-white transition-colors">Política de privacidad</a></li>

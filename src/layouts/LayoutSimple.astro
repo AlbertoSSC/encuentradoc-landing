@@ -1,6 +1,5 @@
 ---
 import '../styles/design-system.css';
-import '../styles/animations.css';
 
 interface Props {
   title?: string;
@@ -16,10 +15,6 @@ const {
 <!doctype html>
 <html lang="es">
   <head>
-    <!-- Applied synchronously so CSS hiding rules (.js-animations .card etc.) take
-         effect before first paint. Without JS this class is never added and all
-         content remains visible. -->
-    <script>document.documentElement.classList.add('js-animations')</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
@@ -48,8 +43,5 @@ const {
   </head>
   <body class="font-sans antialiased">
     <slot />
-    <script>
-      import '../scripts/animations';
-    </script>
   </body>
 </html>
